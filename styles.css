@@ -1,0 +1,273 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #87CEEB;
+    overflow-x: hidden;
+}
+
+header {
+    background: #FF6B6B;
+    color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4ECDC4;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button:hover {
+    background-color: #FFE66D;
+    color: #333;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+main {
+    margin: 20px;
+    height: 500px;
+    position: relative;
+}
+
+.scene {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #a8e6cf;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Мяч */
+.ball {
+    width: 60px;
+    height: 60px;
+    background-color: #FF9F1C;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: inset -10px -10px 20px rgba(0,0,0,0.2);
+}
+
+/* Персонаж */
+.character {
+    position: absolute;
+    bottom: 50px;
+    left: 30%;
+    transform: translateX(-50%);
+    transition: transform 0.3s;
+}
+
+.character .head {
+    width: 50px;
+    height: 50px;
+    background-color: #FFD166;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.character .body {
+    width: 40px;
+    height: 60px;
+    background-color: #06D6A0;
+    border-radius: 20px;
+    margin: -10px auto 0;
+    position: relative;
+    z-index: 1;
+}
+
+.character .arm {
+    width: 15px;
+    height: 40px;
+    background-color: #FFD166;
+    position: absolute;
+    top: 20px;
+    border-radius: 10px;
+}
+
+.character .arm.left {
+    left: -10px;
+    transform-origin: top center;
+}
+
+.character .arm.right {
+    right: -10px;
+    transform-origin: top center;
+}
+
+.character .leg {
+    width: 15px;
+    height: 40px;
+    background-color: #EF476F;
+    position: absolute;
+    bottom: -40px;
+    border-radius: 10px;
+}
+
+.character .leg.left {
+    left: 10px;
+    transform-origin: top center;
+}
+
+.character .leg.right {
+    right: 10px;
+    transform-origin: top center;
+}
+
+/* Идущий персонаж */
+.walking-character {
+    width: 60px;
+    height: 100px;
+    background-color: #EF476F;
+    position: absolute;
+    bottom: 50px;
+    left: -100px;
+    border-radius: 30px 30px 0 0;
+    display: none;
+}
+
+/* Облака */
+.clouds {
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 100px;
+}
+
+.cloud {
+    width: 100px;
+    height: 60px;
+    background: white;
+    border-radius: 50px;
+    position: absolute;
+    opacity: 0.8;
+    animation: cloudMove 30s linear infinite;
+}
+
+.cloud:nth-child(1) {
+    top: 20px;
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.cloud:nth-child(2) {
+    top: 50px;
+    left: 30%;
+    width: 150px;
+    height: 80px;
+    animation-delay: -10s;
+}
+
+.cloud:nth-child(3) {
+    top: 30px;
+    left: 60%;
+    width: 120px;
+    height: 70px;
+    animation-delay: -20s;
+}
+
+/* Анимации */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0) translateX(-50%);
+    }
+    50% {
+        transform: translateY(-200px) translateX(-50%);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes walk {
+    0% {
+        left: -100px;
+    }
+    100% {
+        left: calc(100% + 100px);
+    }
+}
+
+@keyframes cloudMove {
+    0% {
+        transform: translateX(-150px);
+    }
+    100% {
+        transform: translateX(calc(100vw + 150px));
+    }
+}
+
+@keyframes swingArms {
+    0%, 100% {
+        transform: rotate(-20deg);
+    }
+    50% {
+        transform: rotate(20deg);
+    }
+}
+
+@keyframes walkLegs {
+    0%, 100% {
+        transform: rotate(-15deg);
+    }
+    50% {
+        transform: rotate(15deg);
+    }
+}
+
+/* Анимационные классы */
+.bounce {
+    animation: bounce 1s ease infinite;
+}
+
+.rotate {
+    animation: rotate 2s linear infinite;
+}
+
+.walk {
+    display: block !important;
+    animation: walk 10s linear infinite;
+}
+
+.swing-arms .arm.left, .swing-arms .arm.right {
+    animation: swingArms 0.5s ease-in-out infinite alternate;
+}
+
+.walk-legs .leg.left, .walk-legs .leg.right {
+    animation: walkLegs 0.5s ease-in-out infinite alternate;
+}
+
+footer {
+    background: #333;
+    color: white;
+    padding: 15px;
+    margin-top: 20px;
+}
